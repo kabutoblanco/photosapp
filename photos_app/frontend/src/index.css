@@ -1,0 +1,27 @@
+.navbar {
+  position: sticky !important;
+  top: 0;
+  z-index: 99;
+}
+
+.center .card-img-top {
+  object-fit: cover;
+  height: 300px;
+  border-radius: calc(0.25rem - 1px);
+}
+
+.favorite {
+  object-fit: cover;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.favorite:hover {
+  cursor: pointer;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.6);
+}
