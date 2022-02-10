@@ -29,7 +29,9 @@ function List(props) {
       {(type ? photos : favorites).map((item, _) => (
         <Card key={_} photo={item} />
       ))}
-      {(type ? photos : favorites).length === 0 ? <span className='text-warning'>Not found photos favorites</span> : null}
+      {(type ? photos : favorites).length === 0 ? (
+        <span className='text-warning'>{'Not found ' + (type ? 'photos' : 'favorites')}</span>
+      ) : null}
     </Row>
   );
 }

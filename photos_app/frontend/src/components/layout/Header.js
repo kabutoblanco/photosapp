@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
@@ -10,6 +10,9 @@ import { useDispatch } from 'react-redux';
 function Header() {
   const [query, setQuery] = useState('');
   const history = useHistory();
+  const location = useLocation();
+
+  console.log(location.pathname);
 
   //REDUX
   const dispatch = useDispatch();
@@ -21,14 +24,24 @@ function Header() {
   };
 
   return (
-    <Navbar bg='light' expand='md'>
+    <Navbar className='bg-light-1' expand='md'>
       <Container fluid>
         <Navbar.Brand href='#'>Photos</Navbar.Brand>
         <Navbar.Toggle aria-controls='navbarScroll' />
         <Navbar.Collapse id='navbarScroll'>
           <Nav className='me-auto my-2 my-lg-0' style={{ maxHeight: '100px' }} navbarScroll>
-            <Nav.Link href='#/home'>Home</Nav.Link>
-            <Nav.Link href='#/favorites'>Favorites</Nav.Link>
+            <Nav.Link
+              href='#/home'
+              className={
+                location.pathname === '/' || location.pathname.includes('/home') ? 'active' : ''
+              }>
+              Home
+            </Nav.Link>
+            <Nav.Link
+              href='#/favorites'
+              className={location.pathname.includes('/favorites') ? 'active' : ''}>
+              Favorites
+            </Nav.Link>
           </Nav>
           <Form className='d-flex ml-2' onSubmit={queryPhotos}>
             <FormControl

@@ -3,6 +3,15 @@ from django.conf import settings
 import requests
 
 
+def get_photo(id):
+    session = requests.Session()
+    session.headers.update({'Authorization': 'Client-ID ' + settings.CLIENT_ID, 'Accept-Version': 'v1'})
+    r = session.get(settings.API_UNPLASH + '/photos/' + id)
+    if r.status_code == 200:
+        return r.json()
+    return list()
+
+
 def get_photos(query=None):
     session = requests.Session()
     session.headers.update({'Authorization': 'Client-ID ' + settings.CLIENT_ID, 'Accept-Version': 'v1'})
@@ -12,3 +21,4 @@ def get_photos(query=None):
         r = session.get(settings.API_UNPLASH + '/photos?per_page=50')
     if r.status_code == 200:
         return r.json()
+    return list()

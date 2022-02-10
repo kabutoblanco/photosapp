@@ -47,7 +47,8 @@
     "react-transition-group": "^4.4.1",
     "style-loader": "^1.2.1",
     "webfontloader": "^1.6.28",
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "prop-types": "^15.7.2"
   },
   "jest": {
     "setupFilesAfterEnv": [

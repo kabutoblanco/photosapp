@@ -1,12 +1,18 @@
-import { GET_PHOTOS, GET_FAVORITES, POST_PHOTO, UPDATE_PHOTO } from '../actions/types';
+import { GET_PHOTO, GET_PHOTOS, GET_FAVORITES, POST_PHOTO, UPDATE_PHOTO } from '../actions/types';
 
 const initialState = {
+  photo: null,
   photos: [],
   favorites: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GET_PHOTO:
+      return {
+        ...state,
+        photo: action.payload,
+      };
     case GET_PHOTOS:
       return {
         ...state,
@@ -32,7 +38,9 @@ export default function (state = initialState, action) {
         if (item.id_unplash === action.payload.id_unplash) return { ...action.payload };
         return item;
       });
-      const favorites = state.favorites.filter((item) => item.id_unplash != action.payload.id_unplash);
+      const favorites = state.favorites.filter(
+        (item) => item.id_unplash != action.payload.id_unplash
+      );
       return {
         ...state,
         favorites: favorites,

@@ -1,5 +1,9 @@
 import https from './ApiConfig';
 
+const getDetailPhoto = (id) => {
+  return https.get('api/photo/self/' + id + '/');
+};
+
 const getAllPhotos = () => {
   return https.get('api/photo/all');
 };
@@ -21,6 +25,7 @@ const patchPhoto = (id, data) => {
 };
 
 const apis = {
+  getDetailPhoto,
   getAllPhotos,
   getFavorites,
   filterPhotos,

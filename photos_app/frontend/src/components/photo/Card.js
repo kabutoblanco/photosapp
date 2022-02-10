@@ -1,16 +1,24 @@
 import React from 'react';
 
 import { Col, Card as Card_ } from 'react-bootstrap';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useHistory } from 'react-router-dom';
 
 // REDUX
 import { patchPhoto, postPhoto } from '../../actions/photos';
 import { useDispatch } from 'react-redux';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Card(props) {
   // REDUX
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { photo } = props;
+
+  const viewDetail = () => {
+    history.push('detail/' + photo.id_unplash);
+  };
 
   const addFavorite = () => {
     const data = {
@@ -32,7 +40,13 @@ function Card(props) {
   return (
     <Col>
       <Card_ className='my-2 center'>
-        <Card_.Img variant='top' src={photo.preview} width={160} />
+        <LazyLoadImage
+          className='card-img-top'
+          src={photo.preview}
+          placeholderSrc={photo.preview}
+          effect='blur'
+          onClick={viewDetail}
+        />
         <div className='favorite'>
           <img
             onClick={photo.favorite ? updatePhoto : addFavorite}

@@ -1,9 +1,20 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from photos_app.photo_app.models import Photo
 from photos_app.photo_app.serializers import PhotoSerializer, PhotoModelSerializer
-from photos_app.photo_app.service import get_photos
+from photos_app.photo_app.service import get_photo, get_photos
 
+
+class PhotoRetriewSet(generics.RetrieveAPIView):
+    def retrieve(self, request, *args, **kwargs):
+        pk = kwargs['pk']
+        photo = get_photo(pk)
+        if Photo.objects.filter(id_unplash=pk, favorite=True).exists():
+            photo['favorite'] = True  
+        else: 
+            photo['favorite'] = False
+        return Response(photo)
+        
 
 class PhotoViewSet(viewsets.ViewSet):
     def retrieve(self, request, *args, **kwargs):
