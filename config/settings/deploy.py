@@ -1,15 +1,11 @@
 from .base import *
+import dj_database_url
 
 
 ALLOWED_HOSTS = ['*']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASS_DB'),
-        'HOST': config('HOST'),
-        'PORT': '3306'
-    },
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATEBASE_URL')
+#     )
+# }
