@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useParams } from 'react-router-dom';
 
 // REDUX
-import { getPhoto, patchPhoto, postPhoto } from '../../actions/photos';
+import { getPhoto, patchPhoto, postPhoto, resetPhoto } from '../../actions/photos';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -25,7 +25,7 @@ function Detail() {
 
   useEffect(() => {
     return () => {
-      console.log('cleaned up');
+      dispatch(resetPhoto())
     };
   }, []);
 

@@ -5,6 +5,13 @@ import { createMessage, returnErrors } from './messages';
 
 import api from '../services/Api';
 
+export const resetPhoto = () => (dispatch) => {
+  dispatch({
+    type: GET_PHOTO,
+    payload: null,
+  });
+};
+
 export const getPhoto = (id) => (dispatch) => {
   dispatch({ type: ACTION_RUNNING });
   api
