@@ -73,7 +73,7 @@ function Detail() {
           className='detail'
           effect='blur'
           src={photo && !isRunning && !isLoading ? srcPhoto : '/static/frontend/img/loading.gif'}
-          placeholderSrc='/static/frontend/img/loading.jpg'
+          placeholderSrc='/static/frontend/img/loading.gif'
           width='100%'
         />
         <div className='favorite' style={{ right: '28px' }}>
