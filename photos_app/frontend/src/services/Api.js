@@ -1,4 +1,9 @@
 import https from './ApiConfig';
+import axios from 'axios';
+
+const getPhoto = (url) => {
+  return axios.get(url, {responseType: 'arraybuffer'});
+};
 
 const getDetailPhoto = (id) => {
   return https.get('api/photo/self/' + id + '/');
@@ -25,6 +30,7 @@ const patchPhoto = (id, data) => {
 };
 
 const apis = {
+  getPhoto,
   getDetailPhoto,
   getAllPhotos,
   getFavorites,

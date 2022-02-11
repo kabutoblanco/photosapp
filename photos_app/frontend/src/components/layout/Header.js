@@ -12,8 +12,6 @@ function Header() {
   const history = useHistory();
   const location = useLocation();
 
-  console.log(location.pathname);
-
   //REDUX
   const dispatch = useDispatch();
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ListGroup } from 'react-bootstrap';
 
@@ -6,6 +6,8 @@ import { Row, Col } from 'react-bootstrap';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { useParams } from 'react-router-dom';
+
+import api from '../../services/Api';
 
 // REDUX
 import { getPhoto, patchPhoto, postPhoto, resetPhoto } from '../../actions/photos';
@@ -18,7 +20,24 @@ function Detail() {
   // REDUX
   const dispatch = useDispatch();
   const photo = useSelector((state) => state.photos.photo);
-  const isRunning = useSelector((state) => state.utils.isRunning) 
+  const isRunning = useSelector((state) => state.utils.isRunning);
+
+  const [srcPhoto, setSrcPhoto] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (photo)
+      api.getPhoto(photo.urls.regular).then((res) => {
+        setSrcPhoto(
+          'data:' +
+            res.headers['content-type'] +
+            ';base64,' +
+            Buffer.from(res.data, 'binary').toString('base64')
+        );
+        setIsLoading(false);
+      });
+  }, [photo]);
 
   useEffect(() => {
     dispatch(getPhoto(id));
@@ -26,7 +45,7 @@ function Detail() {
 
   useEffect(() => {
     return () => {
-      dispatch(resetPhoto())
+      dispatch(resetPhoto());
     };
   }, []);
 
@@ -53,8 +72,8 @@ function Detail() {
         <LazyLoadImage
           className='detail'
           effect='blur'
-          src={photo && !isRunning ? photo.urls.regular : '/static/frontend/img/loading.gif'}
-          placeholderSrc='/static/frontend/img/loading.gif'
+          src={photo && !isRunning && !isLoading ? srcPhoto : '/static/frontend/img/loading.gif'}
+          placeholderSrc='/static/frontend/img/loading.jpg'
           width='100%'
         />
         <div className='favorite' style={{ right: '28px' }}>
