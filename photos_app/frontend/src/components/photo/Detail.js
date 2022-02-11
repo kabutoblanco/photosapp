@@ -26,17 +26,19 @@ function Detail() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    if (photo)
-      api.getPhoto(photo.urls.regular).then((res) => {
-        setSrcPhoto(
-          'data:' +
-            res.headers['content-type'] +
-            ';base64,' +
-            Buffer.from(res.data, 'binary').toString('base64')
-        );
-        setIsLoading(false);
-      });
+    if (srcPhoto === '') {
+      setIsLoading(true);
+      if (photo)
+        api.getPhoto(photo.urls.regular).then((res) => {
+          setSrcPhoto(
+            'data:' +
+              res.headers['content-type'] +
+              ';base64,' +
+              Buffer.from(res.data, 'binary').toString('base64')
+          );
+          setIsLoading(false);
+        });
+    }
   }, [photo]);
 
   useEffect(() => {
