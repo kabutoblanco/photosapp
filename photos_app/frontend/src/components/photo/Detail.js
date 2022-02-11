@@ -18,6 +18,7 @@ function Detail() {
   // REDUX
   const dispatch = useDispatch();
   const photo = useSelector((state) => state.photos.photo);
+  const isRunning = useSelector((state) => state.utils.isRunning) 
 
   useEffect(() => {
     dispatch(getPhoto(id));
@@ -52,7 +53,7 @@ function Detail() {
         <LazyLoadImage
           className='detail'
           effect='blur'
-          src={photo !== null ? photo.urls.full : '/static/frontend/img/loading.gif'}
+          src={photo && !isRunning ? photo.urls.full : '/static/frontend/img/loading.gif'}
           placeholderSrc='/static/frontend/img/loading.gif'
           width='100%'
         />
