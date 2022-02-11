@@ -53,7 +53,7 @@ function Detail() {
         <LazyLoadImage
           className='detail'
           effect='blur'
-          src={photo && !isRunning ? photo.urls.full : '/static/frontend/img/loading.gif'}
+          src={photo && !isRunning ? photo.urls.regular : '/static/frontend/img/loading.gif'}
           placeholderSrc='/static/frontend/img/loading.gif'
           width='100%'
         />
