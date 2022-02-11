@@ -20,7 +20,6 @@ function Detail() {
   // REDUX
   const dispatch = useDispatch();
   const photo = useSelector((state) => state.photos.photo);
-  const isRunning = useSelector((state) => state.utils.isRunning);
 
   const [srcPhoto, setSrcPhoto] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +38,7 @@ function Detail() {
           setIsLoading(false);
         });
     }
-  }, [photo]);
+  }, [photo, srcPhoto]);
 
   useEffect(() => {
     dispatch(getPhoto(id));
@@ -74,7 +73,7 @@ function Detail() {
         <LazyLoadImage
           className='detail'
           effect='blur'
-          src={photo && !isRunning && !isLoading ? srcPhoto : '/static/frontend/img/loading.gif'}
+          src={photo && !isLoading ? srcPhoto : '/static/frontend/img/loading.gif'}
           placeholderSrc='/static/frontend/img/loading.gif'
           width='100%'
         />
